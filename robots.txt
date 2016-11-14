@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /framework/
+#protected
+Disallow: /protected/components/
+Disallow: /protected/config/
+Disallow: /protected/controllers/
+Disallow: /protected/models/
+Disallow: /protected/runtime/
+Disallow: /protected/.htaccess
+Disallow: /protected/yiic
+Disallow: /protected/yiic.bat
+Disallow: /protected/yiic.php
+#views
+Disallow: /protected/views/site/admin.php

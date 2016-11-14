@@ -1,0 +1,363 @@
+.ml5{
+    margin-left: 5px;
+}
+.mt0{
+    margin-top: 0px;
+}
+.dn{
+    display: none;
+}
+.fr{
+    float: right;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.red{
+    border: 1px solid #f00;
+}
+.cp{
+    cursor: pointer;
+}
+.responsive{
+    position: responsive;
+}
+.relative{
+    position:relative;
+}
+
+/*///////////////////////////////////////*/
+   
+body, h1, h2, h3, h4, h5, h6{
+    /*font-family: 'Roboto', sans-serif;*/
+}
+
+@media (min-width:768px) {    
+    .scrollup{
+        width:40px;
+        height:40px;
+        opacity:0.3;
+        position:fixed;
+        bottom:50px;
+        left:100px;
+        display:none;
+        text-indent:-9999px;
+        background: url(../img/icon_top.png)  no-repeat;
+        z-index:1111;
+    }
+}
+
+@media (max-width:768px) {    
+    .scrollup{
+        width:40px;
+        height:40px;
+        opacity:0.3;
+        position:fixed;
+        bottom:10px;
+        left:10px;
+        display:none;
+        text-indent:-9999px;
+        background: url(../img/icon_top.png)  no-repeat;
+        z-index:1111;
+    }
+}
+
+
+.scrollup:hover{
+opacity:0.6;
+}
+
+/*socialshare*/
+
+.social-icon-container{
+    height: 60px;
+}
+
+.b-share-icon_gplus, .b-share-icon_vkontakte, .b-share-icon_facebook, .b-share-icon_twitter, .b-share-icon_odnoklassniki, .b-share-icon_moimir {
+    width: 45px !important;
+    height:45px !important;
+    margin:3px;
+}
+.b-share-icon_gplus:hover, .b-share-icon_vkontakte:hover, .b-share-icon_facebook:hover, .b-share-icon_twitter:hover, .b-share-icon_odnoklassniki:hover, .b-share-icon_moimir:hover{
+    opacity: 0.8;
+}
+
+.b-share-icon_gplus{
+    background: url(../img/share/go.png) no-repeat !important;
+    background-size: contain !important;
+}
+
+.b-share-icon_vkontakte{
+    background: url(../img/share/vk.png) no-repeat !important;
+    background-size: contain !important;
+}
+
+.b-share-icon_facebook{
+    background: url(../img/share/fb.png) no-repeat !important;
+    background-size: contain !important;
+}
+
+.b-share-icon_twitter{
+    background: url(../img/share/tw.png) no-repeat !important;
+    background-size: contain !important;
+}
+
+
+.b-share-icon_odnoklassniki{
+    background: url(../img/share/ok.png) no-repeat !important;
+    background-size: contain !important;
+}
+
+.b-share-icon_moimir{
+    background: url(../img/share/mr.png) no-repeat !important;
+    background-size: contain !important;
+}
+
+/*
+.container-fluid {
+    border-bottom: 1px solid #DDD;
+}
+*/
+footer{
+    padding: 50px;
+}
+
+.form-group{
+    margin-bottom: 30px;
+}
+
+.image-admin-prev{
+    height: 100px;
+}
+
+.item{
+    /*background: #F5F5F9;
+    border: 1px solid #E2E2E2;
+    margin: 33px 0;
+    padding: 25px 25px 15px 25px;*/
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+
+/*@media (max-width: 992px) {*/
+@media (max-width: 1199px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+}
+
+
+@media (min-width:768px) { /* desctop */
+    .right-to-left{
+        text-align: right;
+    } 
+    .block-content{
+        padding-top: 50px; 
+        padding-bottom: 50px; 
+    }
+}
+
+@media (max-width:768px) { /* mobile */
+    .right-to-left{
+        text-align: left;
+    }    
+    .block-content{
+        padding: 15px; 
+    }
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: transparent;
+    opacity: .8;
+}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    background-color: transparent;
+    opacity: .8;
+}
+
+
+/*colorpicker-2x*/
+.colorpicker-2x .colorpicker-saturation {
+    width: 200px;
+    height: 200px;
+}
+
+.colorpicker-2x .colorpicker-hue,
+.colorpicker-2x .colorpicker-alpha {
+    width: 30px;
+    height: 200px;
+}
+
+.colorpicker-2x .colorpicker-color,
+.colorpicker-2x .colorpicker-color div {
+    height: 30px;
+}
+#colorpicker > span > i > span{
+    font-size: 80%;
+}
+
+
+/*blog*/
+
+.category-item-admin{
+    border-radius: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.category-admin:hover .category-item-admin{
+    opacity: 0.5;
+}
+
+
+#category_select2 > span > span.selection > span > ul > li.select2-selection__choice{
+    margin: 4px;
+    color: #555;
+}
+
+#select2-select2-results{
+    color: #555;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: solid #ccc 1px;
+    outline: 0;
+}
+
+.product-form-thumb {
+height: 75px;
+border: 1px solid #000;
+margin: 5px 5px 0 0;
+}
+
+.product-img-preview{
+    width: 300px;
+    margin-bottom: 15px;
+    position:relative;
+}
+.product-img-preview-link{
+    position: absolute;
+    top: 0px;
+    right: -20px;
+}
+.product-img-preview-div{
+    width: 300px;
+    margin-bottom: 15px;
+    position:relative;
+}
+
+.lSSlideWrapper img{
+    width: 100%;
+}
+.lSSlideOuter .lSPager.lSGallery img{
+    width: 100%;    
+}
+.lSSlideOuter .lSPager.lSGallery li.active, .lSSlideOuter .lSPager.lSGallery li:hover{
+    width: 100%;
+    opacity: 0.7;
+    border-radius: 0 !important;
+}
+
+
+.size-label{
+    float: left;
+    width:56px;   
+    font-weight: bold;
+    padding-top: 6px;
+}
+
+.size-inp{
+    margin: 3px 0;
+}
+
+.size-inp-showcase {
+    margin: 3px 0;
+    padding: 10px;
+    width: 150px;
+}
+
+.price{
+    font-size: 50px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    padding: 9px 5px;
+}
+
+.small-cart{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    opacity:0.5;
+}
+
+.small-cart:hover{
+    opacity:1;
+}
+
+.middle-cart{
+    position: fixed;
+    right: 20px;
+    bottom: -1px;
+}
+
+.close{
+    font-size: 17px;
+}
+
+.op1{
+    opacity: 1;
+    transition: 0.5s;
+}
+
+#error{
+    height: 10px;
+}
+
+.text-danger, .text-success, .btn-default, .btn-success{
+    transition: 0.5s;
+}
+
+.ruble{
+    font-size: 10px;
+}
+
+.glyphicon-refresh{
+    vertical-align: 5%;
+}

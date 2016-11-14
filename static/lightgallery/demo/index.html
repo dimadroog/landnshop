@@ -1,0 +1,61 @@
+<!DOCTYPE html>  <!-- it required for thumbs -->
+
+<link href="../dist/css/lightgallery.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+
+
+<div id="lightgallery" class="">
+	<div class="" 
+	data-src="img/1-1600.jpg" 
+	data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>">
+		<a href="">
+			<img class="img-responsive" src="img/1-480.jpg">
+		</a>
+	</div>
+	<div class=""
+	data-src="img/2-1600.jpg" 
+	data-sub-html="<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>">
+		<a href="">
+			<img class="img-responsive" src="img/2-480.jpg">
+		</a>
+	</div>
+	<div class="" 
+	data-src="img/13-1600.jpg" 
+	data-sub-html="<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>">
+		<a href="">
+			<img class="img-responsive" src="img/13-480.jpg">
+		</a>
+	</div>
+	<div class="" 
+	data-src="img/4-1600.jpg" 
+	data-sub-html="<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>">
+		<a href="">
+			<img class="img-responsive" src="img/4-480.jpg">
+		</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#lightgallery').lightGallery({
+			thumbnail:true,
+			animateThumb: true,
+			showThumbByDefault: false
+		});
+	});
+</script>
+
+<script src="../dist/js/lightgallery.js"></script>
+<script src="../dist/js/lg-fullscreen.js"></script>
+<script src="../dist/js/lg-thumbnail.js"></script>
+<script src="../dist/js/lg-autoplay.js"></script>
+<script src="../dist/js/lg-zoom.js"></script>
+<script src="../lib/jquery.mousewheel.min.js"></script>
+<!--       
+<script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+<script src="../dist/js/lg-video.js"></script>
+<script src="../dist/js/lg-hash.js"></script>
+<script src="../dist/js/lg-pager.js"></script>
+-->
+

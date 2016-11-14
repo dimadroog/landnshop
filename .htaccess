@@ -1,0 +1,30 @@
+AddDefaultCharset UTF-8
+RewriteEngine On
+
+DirectorySlash on
+Options -Indexes -MultiViews
+
+RewriteRule ^.*index.php/(.*) /$1 [R=301,L]
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+RewriteRule . index.php
+
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+RewriteRule ^index\.php$ / [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\ HTTP/
+RewriteRule ^index\.php$ / [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /site/index\ HTTP/
+RewriteRule ^index\.php$ / [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /site\ HTTP/
+RewriteRule ^index\.php$ / [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /site/\ HTTP/
+RewriteRule ^index\.php$ / [R=301,L]
