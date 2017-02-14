@@ -12,10 +12,10 @@
 
 <h1><?php echo $item->title; ?></h1><br>
 <div class="row">
-    <?php if ($item->articleCategory): ?>
+    <?php if (Category::tree()): ?>
         <div class="col-sm-9">
             <ol class="breadcrumb">
-                <li><a href="<?php echo Yii::app()->createUrl('/article/index'); ?>">Все статьи</a></li>
+                <li><a href="<?php echo Yii::app()->createUrl('/article/index'); ?>">Все категории</a></li>
                 <?php if ($last_cat->id): ?> 
                     <?php foreach (Category::arrNames($last_cat->id) as $id => $name): ?>
                         <li>
@@ -50,8 +50,12 @@
                             <p class="text-muted">Цена:</p>
                             <p>
                                 <span class="text-success price"><?php echo $item->price; ?></span> 
-                                <span class="text-muted"> / <?php echo $item->unit; ?></span>
+                                <span class="text-muted">р / <?php echo $item->unit; ?></span>
                             </p>
+
+                            <?php if ($item->amount > $item->min_amount): ?>
+                                
+
                             <p class="text-muted">Минимальный заказ: <?php echo $item->min_amount.' '.$item->unit; ?></p>
                             <h3 class="">Заказать:</h3>
 <!-- form -->
@@ -74,6 +78,9 @@
                                 </div>
                             </form>
 <!-- /form -->
+                            <?php else: ?>
+                                <p class="text-danger">Товара нет в наличии</p>
+                            <?php endif ?>
                             <br>
                             <br>
                             <p class="text-muted">Описание:</p>

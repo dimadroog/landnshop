@@ -1,4 +1,4 @@
-<h1>Управление статьями</h1>
+<h1>Управление товарами</h1>
 
 <?php 
 	if (Yii::app()->user->hasFlash('changedata')){
@@ -13,7 +13,7 @@
 ?>
 <div class="row">
     <div class="col-sm-6 category-item-admin">
-        <p><a href="<?php echo Yii::app()->createUrl('/article/create/'); ?>">Создать новую статью</a></p>
+        <p><a href="<?php echo Yii::app()->createUrl('/article/create/'); ?>">Создать новый товар</a></p>
     </div>
     <div class="col-sm-6 right-to-left">
         <p>
@@ -39,15 +39,19 @@
             <div class="toggle dn">
 	    	<!-- <div class=""> -->
                 <p></p>
-	    		<p><span class="text-muted">Дата: </span><?php echo date('d.m.Y', $item->date); ?></p>
+                <p><span class="text-muted">Цена: </span><?php echo $item->price; ?></p>
+                <p><span class="text-muted">Еденица измерения: </span><?php echo $item->unit; ?></p>
+                <p><span class="text-muted">Количество: </span><?php echo $item->amount; ?></p>
+                <p><span class="text-muted">Мин заказ: </span><?php echo $item->min_amount; ?></p>
                 <p><span class="text-muted">Опубликован: </span><?php echo ($item->publish == 1)?'<span class="label label-success">Да</span>':'<span class="label label-danger">Нет</span>'; ?></p>
+                <p><span class="text-muted">Дата: </span><?php echo date('d.m.Y', $item->date); ?></p>
                 <p>
                 	<span class="text-muted">Категории: </span>
                 	<?php foreach ($item->articleCategory as $value): ?>
                 		<span class="label label-primary"><?php echo Category::fullName($value->id); ?></span>
                 	<?php endforeach ?>
                 </p>
-                <p><a href="<?php echo Yii::app()->createUrl('/article/view/'.$item->id); ?>">Перейти к статье</a></p>
+                <p><a href="<?php echo Yii::app()->createUrl('/article/view/'.$item->id); ?>">Перейти к товару</a></p>
 
 
 	    	</div>
@@ -55,7 +59,7 @@
 	</div>
 <?php endforeach; ?>	
 <?php if (!$articles): ?>
-	<h3 class="text-muted">Пока нет статей</h3>
+	<h3 class="text-muted">Пока нет ничего</h3>
 <?php endif; ?>
 
 

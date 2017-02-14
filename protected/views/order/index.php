@@ -1,4 +1,4 @@
- <h1>Упраление заказами</h1>
+ <h1>Управление заказами</h1>
  <div class="row">
     <div class="col-sm-9">      
 
@@ -15,16 +15,20 @@
 
                 <?php foreach ($orders as $order):?> 
                     <div>
-                        <h3>Клиент: <b><a href="<?php echo Yii::app()->createUrl('customer/profile/'.$order->customer->id); ?>"><?php echo $order->customer->name; ?></a></b></h3>
-                        <p>Телефон: <span class="text-muted"> <?php echo $order->customer->phone; ?></span></p>
+
+                        <p>Номер заказа: <a href="<?php echo Yii::app()->createUrl('order/report/'.$order->id); ?>"><?php echo $order->id.'-'.$order->customer->id.'-'.date('dmy' , $order->date) ?></a></p>
+                        <p>Клиент: <b><a href="<?php echo Yii::app()->createUrl('customer/profile/'.$order->customer->id); ?>"><?php echo $order->customer->name; ?></a></b></p>
                         <p>Дата заказа <?php echo date('d.m.Y H:i' , $order->date); ?></p>
-                        <p>Итоговая сумма: <?php echo $order->sum; ?></p>
                         <p>Состояние заказа: <?php echo ($order->status == 1)?'<span id="status_span" class="text-success">Выполнен</span>':'<span id="status_span" class="text-danger">Ожидает выполнения</span>'; ?> 
                         <a onclick="ChangeStatus(this, <?php echo $order->id; ?>)"><span class="glyphicon glyphicon-refresh ruble cp ml5" aria-hidden="true"></span></a></p>
                         <!-- btn btn-primary btn-xs -->
                         <p><a onclick="CollapseTable(this)">Развернуть</a></p>
 
                         <div id="collapse_tbl" class="table-responsive dn">
+                        <p>id: <span class=""> <?php echo $order->id; ?></span></p>
+                        <p>Телефон: <span class=""> <?php echo $order->customer->phone; ?></span></p>
+                        <p>Итоговая сумма: <?php echo $order->sum; ?></p>                            
+
                             <table class="table table-hover table-bordered"> 
                                 <thead> 
                                     <tr class="bg-primary"> 
@@ -47,7 +51,6 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                            <p>Итоговая сумма: <?php echo $order->sum; ?></p>
                         </div>
                     </div>
                     <br>

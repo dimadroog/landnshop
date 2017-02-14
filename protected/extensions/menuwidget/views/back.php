@@ -19,7 +19,9 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Быстрый переход <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="<?php echo Yii::app()->createUrl('/site/admin') ?>">Админка</a></li>
-							<li><a href="<?php echo Yii::app()->createUrl('/article/admin') ?>">Товары</a></li>
+							<li><a href="<?php echo Yii::app()->createUrl('/order/admin') ?>">Заказы</a></li>
+                            <li><a href="<?php echo Yii::app()->createUrl('/customer/admin') ?>">Клиенты</a></li>
+                            <li><a href="<?php echo Yii::app()->createUrl('/article/admin') ?>">Товары</a></li>
 							<li><a href="<?php echo Yii::app()->createUrl('/category/admin') ?>">Категории</a></li>
 							<li><a href="<?php echo Yii::app()->createUrl('/block/admin') ?>">Блоки</a></li>
 							<li><a href="<?php echo Yii::app()->createUrl('/site/seo') ?>">Seo данные</a></li>
@@ -29,24 +31,37 @@
 	            </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (Yii::app()->user->id): ?>
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo Yii::app()->user->name; ?> <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <?php if (Yii::app()->user->name == 'admin' || Yii::app()->user->name == 'superadmin'): ?>
-                                        <li><a href="<?php echo Yii::app()->createUrl('/site/admin/'); ?>">Админка</a></li>
-                                        <li><a href="<?php echo Yii::app()->createUrl('/site/logout'); ?>">Выйти</a></li>
-                                    <?php else: ?>
-                                    <li><a href="<?php echo Yii::app()->createUrl('/customer/profile/'.Yii::app()->user->id); ?>">Профиль</a></li>
-                                    <li><a href="<?php echo Yii::app()->createUrl('/order/cartlist'); ?>">Корзина</a></li>
+                    	<!-- desctop -->
+                        <li class="dropdown visible-lg">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo Yii::app()->user->name; ?> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <?php if (Yii::app()->user->name == 'admin' || Yii::app()->user->name == 'superadmin'): ?>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/site/admin/'); ?>">Админка</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/article/index'); ?>">Каталог</a></li>
+                                	<li><a href="<?php echo Yii::app()->createUrl('/order/cartlist'); ?>">Корзина</a></li>
                                     <li><a href="<?php echo Yii::app()->createUrl('/site/logout'); ?>">Выйти</a></li>
-                                    <?php endif; ?>
-                                </ul>
-                            </li>
-                        </ul>
+                                <?php else: ?>
+                                	<li><a href="<?php echo Yii::app()->createUrl('/customer/profile/'.Yii::app()->user->id); ?>">Профиль</a></li>
+                                	<li><a href="<?php echo Yii::app()->createUrl('/order/cartlist'); ?>">Корзина</a></li>
+                                	<li><a href="<?php echo Yii::app()->createUrl('/site/logout'); ?>">Выйти</a></li>
+                                <?php endif; ?>
+                            </ul>
+                        </li>
+                        <!-- mobile -->
+                        <?php if (Yii::app()->user->name == 'admin' || Yii::app()->user->name == 'superadmin'): ?>
+                            <li class="hidden-lg"><a href="<?php echo Yii::app()->createUrl('/site/admin/'); ?>">Админка</a></li>
+                            <li class="hidden-lg"><a href="<?php echo Yii::app()->createUrl('/order/cartlist'); ?>">Корзина</a></li>
+                            <li class="hidden-lg"><a href="<?php echo Yii::app()->createUrl('/site/logout'); ?>">Выйти</a></li>
+                        <?php else: ?>
+                            <li class="hidden-lg"><a href="<?php echo Yii::app()->createUrl('/customer/profile/'.Yii::app()->user->id); ?>">Профиль</a></li>
+                            <li class="hidden-lg"><a href="<?php echo Yii::app()->createUrl('/order/cartlist'); ?>">Корзина</a></li>
+                            <li class="hidden-lg"><a href="<?php echo Yii::app()->createUrl('/site/logout'); ?>">Выйти</a></li>
+                        <?php endif; ?>
                     <?php else: ?>
                         <li><a href="<?php echo Yii::app()->createUrl('/customer/login'); ?>">Вход</a></li>
                         <li><a href="<?php echo Yii::app()->createUrl('/customer/registration'); ?>">Регистрация</a></li>
+                        <li><a href="<?php echo Yii::app()->createUrl('/order/cartlist'); ?>">Корзина</a></li>
+
                     <?php endif; ?>
 
                 </ul>

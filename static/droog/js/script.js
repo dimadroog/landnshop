@@ -288,82 +288,53 @@ function AddToCart(elm, url){
 
 }
 
-function AdddToCart(elm, url){
-    var id = jQuery(elm).attr('id');
-    var form = jQuery(elm).closest('form');
-    var state = 0;
+// function AdddToCart(elm, url){
+//     var id = jQuery(elm).attr('id');
+//     var form = jQuery(elm).closest('form');
+//     var state = 0;
 
-    var size = '';
-    form.find('.size-row').each(function(){
-        var hint = jQuery(this).find('#amount-hint').text();
-        var lab = jQuery(this).find('.size-label').text();
-        var val = parseInt(jQuery(this).find('.size-inp-showcase').val(), 10);
+//     var size = '';
+//     form.find('.size-row').each(function(){
+//         var hint = jQuery(this).find('#amount-hint').text();
+//         var lab = jQuery(this).find('.size-label').text();
+//         var val = parseInt(jQuery(this).find('.size-inp-showcase').val(), 10);
 
 
-        if (val > hint){  /*проверка*/
-            form.find('#error').html('<p class="text-danger">Нельзя заказать больше товара чем доступно!</p>');
-            setTimeout(function() {
-                form.find('#error').html('');
-            }, 2500);
-            state = 'fail';
-        } else if (val < 0) { /*проверка*/
-            form.find('#error').html('<p class="text-danger">Количество не может быть отрицательным!</p>');
-            setTimeout(function() {
-                form.find('#error').html('');
-            }, 2500);
-            state = 'fail';
-        } else {
-            if (val > 0){
-                /*переопределяем доступн. к-во*/
-                var new_hint = hint-val;
-                jQuery(this).find('#amount-hint').html(new_hint);
-                jQuery(this).find('#amount').attr('max', new_hint);
-                size += lab+','+val+':'; /*собираем size*/
-            }
-        }
+//         if (val > hint){  /*проверка*/
+//             form.find('#error').html('<p class="text-danger">Нельзя заказать больше товара чем доступно!</p>');
+//             setTimeout(function() {
+//                 form.find('#error').html('');
+//             }, 2500);
+//             state = 'fail';
+//         } else if (val < 0) { /*проверка*/
+//             form.find('#error').html('<p class="text-danger">Количество не может быть отрицательным!</p>');
+//             setTimeout(function() {
+//                 form.find('#error').html('');
+//             }, 2500);
+//             state = 'fail';
+//         } else {
+//             if (val > 0){
+//                 /*переопределяем доступн. к-во*/
+//                 var new_hint = hint-val;
+//                 jQuery(this).find('#amount-hint').html(new_hint);
+//                 jQuery(this).find('#amount').attr('max', new_hint);
+//                 size += lab+','+val+':'; /*собираем size*/
+//             }
+//         }
 
-    })
-    if (state == 'fail') { /*не прошли проверку*/
-        return false;
-    }
+//     })
+//     if (state == 'fail') { /*не прошли проверку*/
+//         return false;
+//     }
 
-    if (size == '') { /*проверка*/
-        form.find('#error').html('<p class="text-danger">Укажите количество товара!</p>');
-        setTimeout(function() {
-            form.find('#error').html('');
-        }, 2500);
-        return false; /*не прошли проверку*/
-    }
-
-    // jQuery.ajax({
-    //     type: 'POST',
-    //     url: '<?php //echo Yii::app()->createUrl('order/addtocart/'); ?>',
-    //     url: url,
-    //     data: {'id': id, 'size': size},
-    //     success: function(data){
-    //         var jsondata = jQuery.parseJSON(data);
-    //         c(jsondata);
-    //         form.trigger('reset');
-    //         jQuery('.small-cart').show();
-    //         jQuery('.middle-cart').hide();
-    //         jQuery('.cart_itm').html(jsondata.itm);
-    //         jQuery('.cart_sum').html(jsondata.sum);
-    //         jQuery('.cart_pos').html(jsondata.pos);
-    //         form.find('#error').html('<p class="text-success">Товар добавлен в корзину!</p>');
-    //         jQuery('.small-cart').addClass('btn-success op1');
-    //         form.find('.btn').addClass('btn-success');
-    //         setTimeout(function() {
-    //             form.find('#error').html('');
-    //             form.find('.btn').removeClass('btn-success');
-    //             jQuery('.small-cart').removeClass('btn-success op1');
-    //         }, 1000);
-    //     }, 
-    //     error: function(){
-    //         alert('error');
-    //     }
-    // });
-
-}
+//     if (size == '') { /*проверка*/
+//         form.find('#error').html('<p class="text-danger">Укажите количество товара!</p>');
+//         setTimeout(function() {
+//             form.find('#error').html('');
+//         }, 2500);
+//         return false; /*не прошли проверку*/
+//     }
+// }
 
 
 function ShowCart(){

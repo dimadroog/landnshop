@@ -1,24 +1,19 @@
-<h2>Вход для клиентов</h2>
-<form id="login_form" action="<?php echo Yii::app()->createUrl('customer/login/'); ?>" method="post">
+<h1>Сброс пароля</h1>
+<form id="fp_form" action="<?php echo Yii::app()->createUrl('customer/forgotpass/'); ?>" method="post">
             <div class="form-group">
                 <label class="control-label" for="id_mail">EMail: <span class="text-danger">*</span></label>
                 <input class="form-control required" type="text" id="id_mail" name="mail" value="">
             </div>  
-            <div class="form-group">
-                <label class="control-label" for="id_pass">Пароль: <span class="text-danger">*</span></label>
-                <input class="form-control required" type="password" id="id_pass" name="pass" value="">
-            </div>       
-            <button type="submit" class="btn btn-primary">ВОЙТИ</button>
-            <p id="error" class="text-danger error"><?php echo $message; ?></p>
-            <a href="<?php echo Yii::app()->createUrl('customer/forgotpass'); ?>" id="" class="">Забыли пароль?</a>
-             | 
-            <a href="<?php echo Yii::app()->createUrl('customer/registration'); ?>" id="" class="">Регистрация</a>
+            <button type="submit" class="btn btn-primary">Сбросить пароль</button>
+            <br>
+            <br>
+            <p id="error" class="text-danger"><?php echo $message; ?></p>
 </form>
 
 
 <script type="text/javascript">
 
-    jQuery("#login_form").submit(function(e){
+    jQuery("#fp_form").submit(function(e){
         // e.preventDefault();
         var state = 'ok';
         var email = jQuery('#id_mail');

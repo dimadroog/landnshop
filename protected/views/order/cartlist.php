@@ -1,14 +1,24 @@
 <h1>Корзина</h1>
+
+<?php 
+    if (Yii::app()->user->hasFlash('success')){
+        echo '<div class="panel panel-success"><div class="panel-body bg-success">'.Yii::app()->user->getFlash('success').'</div></div>';
+    }
+    if (Yii::app()->user->hasFlash('error')){
+        echo '<div class="panel panel-danger"><div class="panel-body bg-danger">'.Yii::app()->user->getFlash('error').'</div></div>';
+    }
+?>
+
 <?php if(Yii::app()->LavrikShoppingCart->sum == 0): ?>
-    <p class="text-muted">Ваша корзина пуста. <a href="<?php echo Yii::app()->createUrl('article/index/'); ?>">Вернуться в каталог</a></p>
+    <p class="text-muted vertical-span">Ваша корзина пуста. <a href="<?php echo Yii::app()->createUrl('article/index/'); ?>">Перейти в каталог</a></p>
 <?php else: ?>
     <?php       
         // echo '<pre>';
         // print_r($cart);
         // echo '</pre>'; 
-        // echo '<pre>';
+        // echo '<pre><h1>';
         // var_dump(Yii::app()->user->id);
-        // echo '</pre>'; 
+        // echo '</h1></pre>'; 
 
     ?>
     <div class="table-responsive">
@@ -16,10 +26,11 @@
             <thead> 
                 <tr class="bg-primary"> 
                     <th>Название</th> 
-                    <th>Цена</th> 
+                    <th>Ед. изм.</th>
+                    <th>Цена</th>
                     <th>Количество</th>
                     <th>Сумма</th>
-                    <th>Действия</th>
+                    <th>Действие</th>
                 </tr> 
             </thead> 
             <tbody>
@@ -30,9 +41,14 @@
                         <td>
                             <a href="<?php echo Yii::app()->createUrl('article/'.$item['id']); ?>"><?php echo $prod->title; ?></a>
                         </td>
+                        <td><?php echo $prod->unit; ?></td>
+                        <td><?php echo $prod->price; ?></td>
+                        <td>
+                            <?php echo $item['count']; ?>
+                            <a href="<?php echo Yii::app()->createUrl('order/additem/', array('key'=>$key)); ?>"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></a> 
+                            <a href="<?php echo Yii::app()->createUrl('order/removeitem/', array('key'=>$key)); ?>"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a> 
 
-                        <td class="text-success"><?php echo $prod->price; ?></td>
-                        <td><?php echo $item['count']; ?></td>
+                        </td>
                         <td><?php echo $item['count']*$item['price']; ?></td>
                         <td>
                             <a class="" href="<?php echo Yii::app()->createUrl('order/deleteitem/', array('key'=>$key)); ?>">Удалить</a> 
@@ -55,63 +71,19 @@
     </div>
     <hr>
     <h2>Оформить заказ</h2>
-    <?php if (Yii::app()->user->name == 'admin' || Yii::app()->user->name == 'superadmin'): ?>
-        <form action="<?php echo Yii::app()->createUrl('order/order/'); ?>" onsubmit="return CheckRequiredAdmin()" method="post">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title">Выбрать клиента</h2>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label class="control-label" for="id_select">Клиент: <span class="text-danger">*</span></label>
-                        <select class="form-control" type="text" id="id_select" name="select" onchange="FillInputs(this)">
-                            <option value="" disabled selected>Выбрать</option>
-                            <?php foreach ($users as $user):?>
-                                <!-- <option value="<?php echo $user->id; ?>"><?php echo $user->name; ?></option> -->
-                                <option value='{
-                                "id": "<?php echo $user->id; ?>", 
-                                "name": "<?php echo $user->name; ?>", 
-                                "phone": "<?php echo $user->phone; ?>"
-                                }'>
-                                    <?php echo $user->name; ?> : <?php echo $user->phone; ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                        <input class="form-control" type="hidden" id="id_id" name="id" value="">
-                        <input class="form-control" type="hidden" id="id_name" name="name" value="">
-                        <input class="form-control" type="hidden" id="id_phone" name="phone" value="">
-                    </div>           
-                    <button type="submit" class="btn btn-primary">ОФОРМИТЬ ЗАКАЗ</button>
-                </div>
-            </div>
-        </form>
+    <?php if (Yii::app()->user->id): ?>
+        <?php if (Yii::app()->user->name == 'admin' || Yii::app()->user->name == 'superadmin'): ?>
+            <?php include('cartlistform/admin.php'); ?>
+        <?php else: ?>
+            <?php include('cartlistform/user.php'); ?>
+        <?php endif; ?>   
     <?php else: ?>
-        <form action="<?php echo Yii::app()->createUrl('order/order/'); ?>" onsubmit="return CheckRequired()" method="post">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title">Данные о заказчике</h2>
-                </div>
-                <div class="panel-body">
-                <p><span class="text-muted"></span><?php echo $user->name; ?></p>
-                <p><span class="text-muted"></span><?php echo $user->phone; ?></p>
-                <p><span class="text-muted"></span><?php echo $user->mail; ?></p>
-                <p><a href="<?php echo Yii::app()->createUrl('customer/changedata/'.$user->id); ?>">Изменить данные</a></p>
-                    <div class="form-group">
-                        <label class="control-label" for="id_name">Имя и Фамилия: <span class="text-danger">*</span></label>
-                        <input class="form-control" type="hidden" id="id_id" name="id" value="<?php echo $user->id; ?>">
-                        <input class="form-control" type="text" id="id_name" name="name" value="<?php echo $user->name; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="id_phone">Телефон: <span class="text-danger">*</span></label>
-                        <input class="form-control" type="text" id="id_phone" name="phone" value="<?php echo $user->phone; ?>">
-                    </div>                        
-
-                    <button type="submit" class="btn btn-primary">ОФОРМИТЬ ЗАКАЗ</button>
-                </div>
-            </div>
-        </form>
-    <?php endif; //admin ?>
+        <?php include('cartlistform/guest.php'); ?>
+    <?php endif; ?>
 <?php endif; ?>
+
+
+
 <script type="text/javascript">
     function CheckRequired(){
         var name = jQuery('#id_name');
@@ -135,19 +107,7 @@
             return false;
         }
         
-    }
-
-    function FillInputs(elm){
-        var select_val = jQuery(elm).val();
-        var jsondata = jQuery.parseJSON(select_val);
-        var id = jQuery('#id_id');
-        var name = jQuery('#id_name');
-        var phone = jQuery('#id_phone');
-        id.val(jsondata.id);
-        name.val(jsondata.name);
-        phone.val(jsondata.phone);
-        // c(jsondata);
-    }   
+    } 
 
     function CheckRequiredAdmin(){
         var id = jQuery('#id_id');

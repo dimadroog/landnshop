@@ -62,9 +62,12 @@ class ArticleController extends Controller
         $arr = array_slice($arr, 0, 5, true);
         $last_cat = end($cats);
 
+		$files = glob('images/product/'.$item->id.'-*');
 		$images = array();
-		foreach (glob('images/product/'.$item->id.'-*') as $filename) {
-		    $images[] = $filename;
+		if ($files) {
+			foreach ($files as $filename) {
+			    $images[] = $filename;
+			}
 		}
 
         $this->render('view', array(
@@ -231,11 +234,12 @@ class ArticleController extends Controller
 				}
 			}
 
-			// $bg_style = $this->bgStyle($item->bg_style);
-			// $block_message = $this->blockMessage($item->alias);
+			$files = glob('images/product/'.$item->id.'-*');
 			$images = array();
-			foreach (glob('images/product/'.$item->id.'-*') as $filename) {
-			    $images[] = $filename;
+			if ($files) {
+				foreach ($files as $filename) {
+				    $images[] = $filename;
+				}
 			}
 			$this->render('edit', array('item' => $item, 'images' => $images, ));
 		} else {
@@ -255,6 +259,8 @@ class ArticleController extends Controller
 			throw new CHttpException(403, 'У Вас нет прав для просмотра этой страницы.');
 		}
 	}
+
+	
 	public function actionImgRemove()
 	{
 		unlink($_POST['filename']);

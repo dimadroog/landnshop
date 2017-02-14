@@ -1,8 +1,11 @@
 <?php echo $item->content; ?>
-<div class="text-center">
-    Copyright &copy; 2015 - <?php echo date('Y'); ?> by <a target="_blank" href="http://vk.com/id44320505">Dmitry Gorbachev</a>.<br>
-    All Rights Reserved.<br/>
-    <?php echo Yii::powered(); ?>
+<div class="text-center footer">
+    <p>
+        Copyright by <a href="<?php echo Yii::app()->createUrl('/site/index/'); ?>"><?php echo Setting::getData('sitename'); ?></a> &copy; 2015 - <?php echo date('Y'); ?>. All Rights Reserved.
+    </p>
+    <p>
+        Powered by <a target="_blank" href="http://droog.cf/article/index">landnshop</a>
+    </p>
     <div class="hidden-xs hidden-sm">
         <div class="social-icon-container"> 
             <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>

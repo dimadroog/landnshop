@@ -69,7 +69,7 @@ $config = array(
 	|
 	*/
 	// 'upload_dir' => '/source/',
-	// 'upload_dir' => '/landnblog/static/wysiwyg/responsive_filemanager/source/',  /*local*/
+// 	'upload_dir' => '/landnblog/static/wysiwyg/responsive_filemanager/source/',  /*local*/
 	'upload_dir' => '/static/wysiwyg/responsive_filemanager/source/', /*remote webserver*/
 	/*
 	|--------------------------------------------------------------------------

@@ -17,6 +17,21 @@
  */
 class Article extends CActiveRecord
 {
+
+	public static function getFirstImage($id){
+		$images = glob('images/product/'.$id.'-*');
+		if ($images){
+    		$first_image = array_shift($images);
+	    } else {
+	       $first_image = 'images/product/default.jpg';
+	    }
+		return $first_image; 
+	}
+
+	public static function getData($id, $param){
+		$item = Article::model()->findByPk($id);
+		return $item->$param;
+	}
 	/**
 	 * @return string the associated database table name
 	 */

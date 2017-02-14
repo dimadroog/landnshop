@@ -55,13 +55,14 @@ class SiteController extends Controller
 
 
 	public function actionContact() {
+	    $sitename = Setting::getData('sitename');
 		if($_POST){
 			$name = $_POST['contact_name'];
 			$phone = $_POST['contact_phone'];
 			$email = $_POST['contact_email'];
 			$message = $_POST['contact_message'];
-			$subject = 'Новое письмо с сайта '.Setting::getData('sitename');
-            $body = "Новое письмо с сайта\r\n"."Имя: $name\r\n"."Телефон: $phone\r\n"."Email: {$email}\r\n"."Текст сообщения: $message";
+			$subject = 'Новое письмо с сайта '.$sitename;
+            $body = "Новое письмо с сайта $sitename\r\n"."Имя: $name\r\n"."Телефон: $phone\r\n"."Email: {$email}\r\n"."Текст сообщения: $message";
             $name='=?UTF-8?B?'.base64_encode($name).'?=';
 			$subject='=?UTF-8?B?'.base64_encode($subject).'?=';
 			$headers="From: $name <{$email}>\r\n".

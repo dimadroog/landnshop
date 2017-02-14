@@ -41,9 +41,17 @@ class Customer extends CActiveRecord
 		return count($not_apply_orders);
 	}
 
-	public static function getData($param){
-		$user = Customer::model()->findByPk(Yii::app()->user->id);
+	public static function getData($id, $param){
+		$user = Customer::model()->findByPk($id);
 		return $user->$param;
+	}
+
+	public static function getAddress($id){
+		$user = Customer::model()->findByPk($id);
+		$url = 'https://maps.googleapis.com/maps/api/geocode/json?language=ru&latlng='.$user->position_lt.','.$user->position_lg;
+		$json = file_get_contents($url);
+		$info = json_decode($json);
+		return $info->results[0]->formatted_address; 
 	}
 
 	/**

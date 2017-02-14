@@ -1,11 +1,11 @@
 <?php 
     if ($_GET['cat']) {
-        $title = 'Статьи сайта '.Setting::getData('sitename').'. Категория - '.Category::name($_GET['cat']);
-        $description = 'Материалы категории - '.Category::name($_GET['cat']).'. '.Setting::getData('seo_description');
+        $title = 'Товары сайта '.Setting::getData('sitename').'. Категория - '.Category::name($_GET['cat']);
+        $description = 'Товары категории - '.Category::name($_GET['cat']).'. '.Setting::getData('seo_description');
         $keywords = Category::name($_GET['cat']).', '.Setting::getData('seo_keywords');
     } else {
-        $title = 'Статьи сайта '.Setting::getData('sitename').'. Все материалы сайта ';
-        $description = 'Все материалы сайта '.Setting::getData('sitename').'. '.Setting::getData('seo_description');
+        $title = 'Товары сайта '.Setting::getData('sitename').'. Весь каталог сайта ';
+        $description = 'Весь каталог сайта '.Setting::getData('sitename').'. '.Setting::getData('seo_description');
         $keywords = Setting::getData('seo_keywords');
     }
     $this->pageTitle = $title;
@@ -19,19 +19,15 @@
 
 
 
-<div class="panel panel-default">
-    <div class="panel-body">
-
         <?php if (!$articles): ?>
-            <h3 class="text-muted">Пока нет статей</h3>
+            <h3 class="text-muted">Пока нет товаров</h3>
             <?php if ($_GET['search']): ?>
                 <p class="text-muted">По Вашему запросу "<span class="text-warning"><?php echo $_GET['search']; ?></span>" ничего не найдено.</p>  
-                <p class="text-muted">Убедитесь в правильности поисковой фразы или перейдите в раздел <a href="<?php echo Yii::app()->createUrl('/article/index'); ?>">все статьи</a>.</p>
+                <p class="text-muted">Убедитесь в правильности поисковой фразы или перейдите в раздел <a href="<?php echo Yii::app()->createUrl('/article/index'); ?>">все товары</a>.</p>
             <?php endif; ?>
         <?php endif; ?>
 
 
-        <label for="exampleInputEmail1">Поиск по каталогу</label>
 
         <form action="<?php echo Yii::app()->createUrl('/article/index'); ?>" class="" role="search">
             <div class="row">
@@ -53,16 +49,15 @@
                 <p class="text-muted">Результатов: <?php echo count($articles); ?></p>  
         <?php endif; ?> 
 
-    </div> 
-</div>
+
 
 <br>
 
 <div class="row">
-    <?php if ($item->articleCategory): ?>
+    <?php if (Category::tree()): ?>
         <div class="col-sm-9">
             <ol class="breadcrumb">
-                <li><a href="<?php echo Yii::app()->createUrl('/article/index'); ?>">Все статьи</a></li>
+                <li><a href="<?php echo Yii::app()->createUrl('/article/index'); ?>">Все категории</a></li>
                 <?php if ($current_cat->id): ?> 
                     <?php foreach (Category::arrNames($current_cat->id) as $id => $name): ?>
                         <li>
@@ -74,30 +69,54 @@
     <?php else: ?>
         <div class="col-sm-12">
     <?php endif ?>
+<div class="row">    
+    <?php foreach ($articles as $item): ?>
+        <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                        <a href="<?php echo Yii::app()->createUrl('/article/view/'.$item->id); ?>"><h3 class="clip-prev-title"><?php echo $item->title; ?></h3></a>
+                
+                        <a href="<?php echo Yii::app()->createUrl('/article/view/'.$item->id); ?>"><div style="background-image: url(<?php echo Yii::app()->request->baseUrl.'/'.Article::getFirstImage($item->id); ?>);" class="item-prev-img"></div></a>
+                   
+                        <div class="article-content">
+                            
+                            <p>
+                                <span class="text-success price"><?php echo $item->price; ?></span> 
+                                <span class="text-muted">р / <?php echo $item->unit; ?></span>
+                            </p>
 
-        <?php foreach ($articles as $item): ?>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="half-article">
-                        <h3><a href="<?php echo Yii::app()->createUrl('/article/view/'.$item->id); ?>"><?php echo $item->title; ?></a></h3>
-                        <p class="text-muted">Дата: <?php echo date('d.m.Y', $item->date); ?></p>
-                        <p><?php echo $item->preview; ?></p>
-                        <p class="text-right"><a href="<?php echo Yii::app()->createUrl('/article/view/'.$item->id); ?>">Читать далее</a></p>
-                    </div>
+                            <?php if ($item->amount > $item->min_amount): ?>
+                                
 
-                    <div class="half-article">  
-                        <p>
-                        <?php if ($item->articleCategory): ?>
-                            <span class="text-muted">Категории: </span>
-                            <?php foreach ($item->articleCategory as $value): ?>
-                                <a class="text-muted" href="<?php echo Yii::app()->createUrl('/article/index'); ?>?cat=<?php echo $value['id'] ?>"><?php echo $value->name; ?>;</a>
-                            <?php endforeach ?>
-                        <?php endif ?>
-                        </p>
+                            <p class="text-muted">Минимальный заказ: <?php echo $item->min_amount.' '.$item->unit; ?></p>
+<!-- form -->
+                            <form name="addtocart">
+                                <div class="form-group">
+                                    <div class="size-row">
+                                        <input class="size-inp-showcase" type="number" name="amount" id="amount" value="<?php echo $item->min_amount;?>" size="20" min="<?php echo $item->min_amount; ?>" max="<?php echo $item->amount; ?>"> 
+                                            <span class="text-muted ml5">
+                                                <span class="available">Доступно: </span>
+                                                <span id="amount-hint"><?php echo $item->amount; ?></span>
+                                                <?php echo $item->unit; ?>
+                                            </span>
+                                    </div>
+                                </div>
+                                <p>
+                                    <a id="<?php echo $item->id; ?>" class="btn btn-primary" onClick="AddToCart(this, '<?php echo Yii::app()->createUrl('order/addtocart/'); ?>');">В корзину</a>
+                                </p>
+                                <div id="error"></div>
+                            </form>
+<!-- /form -->
+                            <?php else: ?>
+                                <p class="text-danger">Товара нет в наличии</p>
+                            <?php endif ?>
+                        </div>
                     </div>
                 </div>
-            </div>
+        </div> <!-- col-sm-4 -->
+       
         <?php endforeach; ?> 
+</div>
 
 
 
@@ -116,7 +135,8 @@
         </div>
 
     </div>
-    <?php if ($item->articleCategory): ?>
+    <?php //var_dump($item); ?>
+    <?php if (Category::tree()): ?>
         <div class="col-sm-3">
 
             <div class="list-group">

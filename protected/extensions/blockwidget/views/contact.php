@@ -6,11 +6,11 @@
 #contact_error{
     height: 1px;
 }
-.form-control, .btn{
+.form-control, .contact-button{
     transition: 0.5s;
     height: 60px;
 }
-.btn{
+.contact-button{
     text-transform: uppercase;
 }
 textarea.form-control{
@@ -65,12 +65,13 @@ text-transform: capitalize;
                             <input type="text" class="form-control contact_required" placeholder="Ваш Email *" id="contact_email" name="contact_email">
                         </div>
                     </div>
+                    <input type="text" class="dn" placeholder="" id="honey_pot" name="honey_pot" value="22"> 
                     <div class="col-md-6 wow slideInRight">
                         <div class="form-group">
                             <textarea class="form-control contact_required" placeholder="Текст сообщения *" id="contact_message" name="contact_message"></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary btn-form-front" value="Отправить сообщение" style="display: block; width: 100%;">
+                            <input type="submit" class="btn contact-button btn-primary btn-form-front" value="Отправить сообщение" style="display: block; width: 100%;">
                         </div>
                     </div>
                 </div>
@@ -86,6 +87,11 @@ text-transform: capitalize;
     jQuery("#contact_form").submit(function(e){
         e.preventDefault();
         var state = 'ok';
+        var honey_pot = jQuery('#honey_pot').val();
+        if (honey_pot != '22') {
+            window.location="http://localhost/";
+            return false;
+        }
         var email = jQuery('#contact_email');
         if(!isValidEmailAddress(email.val())) {
             email.parent().addClass('has-error'); 
